@@ -1,0 +1,33 @@
+{
+  "name": "tokome-editor-ext",
+  "description": "NicoVideo Alternative Owner Comments Editor",
+  "private": true,
+  "version": "0.0.1",
+  "type": "module",
+  "scripts": {
+    "dev": "wxt",
+    "dev:firefox": "wxt -b firefox",
+    "build": "wxt build",
+    "build:firefox": "wxt build -b firefox",
+    "zip": "wxt zip",
+    "zip:firefox": "wxt zip -b firefox",
+    "compile": "tsc --noEmit",
+    "postinstall": "wxt prepare",
+    "lint": "biome lint --write .",
+    "format": "biome format .",
+    "check": "biome check --write ."
+  },
+  "dependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "1.9.4",
+    "@types/chrome": "^0.0.280",
+    "@types/react": "^19.0.1",
+    "@types/react-dom": "^19.0.2",
+    "@wxt-dev/module-react": "^1.1.2",
+    "typescript": "^5.6.3",
+    "wxt": "^0.19.13"
+  }
+}
