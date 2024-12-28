@@ -7,7 +7,7 @@ export const Editor = () => {
   useEffect(() => {
     const setup = async () => {
       const elements = await getElements();
-      elements.playerDivElement.style.zIndex = "101";
+      elements.playerDivElement.style.zIndex = "6";
     };
     void setup();
     return () => {

@@ -2,3 +2,10 @@
   padding-inline: var(--spacing-x3);
   padding-bottom: var(--spacing-base);
 }
+
+.container {
+  max-width: 1190px;
+  margin: auto;
+  display: flex;
+  flex-direction: row-reverse;
+}

@@ -1,48 +1,51 @@
 import { v4 as uuid } from "uuid";
 import { swfetch } from "../fetch";
 import { HEADERS } from "./const";
-import type { WatchData } from "./watch";
 
-type ForkType = "main" | "easy" | "owner";
-
-export const getThreadKey = async (watchId: string): Promise<string> => {
+export const getThreadKey = async (
+  watchId: string
+): Promise<string | undefined> => {
   const response = await fetch(
     `https://nvapi.nicovideo.jp/v1/comment/keys/thread?videoId=${watchId}`,
     {
       headers: HEADERS,
     }
   );
-  const data = await response.json();
-  return data.data.threadKey;
+  const data: NvAPIResponse<ThreadKey> = await response.json();
+  return data.data?.threadKey;
 };
 
-export const getPostKey = async (threadId: string): Promise<string> => {
+export const getPostKey = async (
+  threadId: string
+): Promise<string | undefined> => {
   const response = await fetch(
     `https://nvapi.nicovideo.jp/v1/comment/keys/post?threadId=${threadId}`,
     {
       headers: HEADERS,
     }
   );
-  const data = await response.json();
-  return data.data.postKey;
+  const data: NvAPIResponse<PostKey> = await response.json();
+  return data.data?.postKey;
 };
 
-export const getUpdateKey = async (threadId: string): Promise<string> => {
+export const getUpdateKey = async (
+  threadId: string
+): Promise<string | undefined> => {
   const response = await swfetch(
     `https://nvapi.nicovideo.jp/v1/comment/keys/update?threadId=${threadId}`,
     {
       headers: HEADERS,
     }
   );
-  const data = await response.json();
-  return data.data.updateKey;
+  const data: NvAPIResponse<UpdateKey> = await response.json();
+  return data.data?.updateKey;
 };
 
 export const getComments = async (
   watchData: WatchData,
   forks: ForkType[] = ["main", "easy", "owner"],
   threadKey: string | null = null
-) => {
+): Promise<CommentData | null> => {
   const payload = {
     threadKey: threadKey || watchData.comment.nvComment.threadKey,
     params: watchData.comment.nvComment.params,
@@ -62,24 +65,15 @@ export const getComments = async (
       body: JSON.stringify(payload),
     }
   );
-  const data = await response.json();
+  const data: NvCommentAPIResponse = await response.json();
+  if (data.meta.error_code === "EXPIRED_TOKEN") {
+    const newThreadKey = await getThreadKey(watchData.video.id);
+    return await getComments(watchData, forks, newThreadKey);
+  }
   return data.data;
 };
 
-interface MiniComment {
-  vposMs: number;
-  commands: string[];
-  body: string;
-}
-
-interface OwnerComment extends MiniComment {
-  id: string;
-  no: number;
-  userId: string;
-  isMyPost: boolean;
-  isPremium: boolean;
-}
-
+// 返り値の型を確認する.
 export const updateOwnerComment = async (
   watchData: WatchData,
   updateKey: string,

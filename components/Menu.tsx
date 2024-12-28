@@ -13,7 +13,7 @@ export const Menu = () => {
   };
   if (!MenuElement) return <></>;
   return createPortal(
-    <div>
+    <div className={styled.container}>
       <Button
         className={styled.button}
         type="button"
