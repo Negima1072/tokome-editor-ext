@@ -1,0 +1,19 @@
+.button {
+  font-weight: var(--font-weights-bold);
+  font-size: var(--font-sizes-base);
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  user-select: none;
+  padding-inline: var(--spacing-x2);
+  display: inline-flex;
+  color: var(--colors-action-text-on-base);
+  fill: var(--colors-action-text-on-base);
+  background-color: var(--colors-action-base);
+  height: var(--sizes-x4);
+  border-radius: var(--radii-full);
+
+  &:hover {
+    background-color: var(--colors-action-base-hover);
+  }
+}

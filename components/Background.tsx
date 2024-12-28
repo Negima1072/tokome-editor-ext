@@ -11,7 +11,7 @@ export const Background = () => {
         height: "100vh",
         backgroundColor: "rgba(0, 0, 0, 0.5)",
         zIndex: 100,
-        pointerEvents: "none",
+        pointerEvents: "auto",
       }}
     />,
     document.body

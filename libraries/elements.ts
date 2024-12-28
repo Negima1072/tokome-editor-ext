@@ -1,21 +1,54 @@
 import { sleep } from "./sleep";
 
-export const getSectionElement = async (): Promise<Element> => {
+export interface Elements {
+  mainSectionElement: HTMLElement;
+  sidebarElement: HTMLDivElement;
+  playerDivElement: HTMLDivElement;
+  posterDivElement: HTMLDivElement;
+}
+
+export const getElements = async (): Promise<Elements> => {
   let count = 0;
   while (count < 300) {
-    const sectionElement = document.querySelector("main > div > section");
+    const mainSectionElement = document.querySelector<HTMLElement>(
+      "main > div > section"
+    );
+    const sidebarElement = document.querySelector<HTMLDivElement>(
+      "div.grid-area_\\[sidebar\\] > div > div:has(section)"
+    );
+    const playerDivElement = document.querySelector<HTMLDivElement>(
+      "div.grid-area_\\[player\\] > div > div:has(video)"
+    );
+    const posterDivElement = document.querySelector<HTMLDivElement>(
+      "div.grid-area_\\[player\\] > div > div:has(input)"
+    );
     count++;
-    if (sectionElement === null) {
+    if (
+      mainSectionElement === null ||
+      sidebarElement === null ||
+      playerDivElement === null ||
+      posterDivElement === null
+    ) {
       await sleep(100);
       continue;
     }
-    return sectionElement;
+    return {
+      mainSectionElement,
+      sidebarElement,
+      playerDivElement,
+      posterDivElement,
+    };
   }
   throw new Error("section element is not found;;");
 };
 
-export const createMenuElement = (): HTMLDivElement => {
+export const createMenuElement = () => {
   const MenuElement = document.createElement("div");
   MenuElement.id = "tokome:menu";
+  return MenuElement;
+};
+
+export const getMenuElement = () => {
+  const MenuElement = document.getElementById("tokome:menu");
   return MenuElement;
 };

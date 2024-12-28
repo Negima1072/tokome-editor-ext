@@ -1,5 +1,5 @@
 import { Root } from "@/components/Root";
-import { createMenuElement, getSectionElement } from "@/libraries/elements";
+import { createMenuElement, getElements } from "@/libraries/elements";
 import { createRoot } from "react-dom/client";
 
 export default defineContentScript({
@@ -7,16 +7,16 @@ export default defineContentScript({
   runAt: "document_start",
   world: "MAIN",
   main() {
-    const initialize = async () => {
-      const sectionElement = await getSectionElement();
+    const init = async () => {
+      const elements = await getElements();
 
       const MenuElement = createMenuElement();
-      sectionElement.before(MenuElement);
+      elements.mainSectionElement.before(MenuElement);
 
-      const RootElement = document.createElement("div");
-      document.body.append(RootElement);
-      createRoot(RootElement).render(<Root />);
+      const root = document.createElement("div");
+      document.body.append(root);
+      createRoot(root).render(<Root />);
     };
-    void initialize();
+    void init();
   },
 });

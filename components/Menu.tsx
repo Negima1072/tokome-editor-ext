@@ -1,26 +1,26 @@
-import { useCallback } from "react";
-import ReactDOM from "react-dom";
+import { editorOpenAtom } from "@/libraries/atoms";
+import { getMenuElement } from "@/libraries/elements";
+import { useSetAtom } from "jotai";
+import { createPortal } from "react-dom";
+import { Button } from "./Button";
+import styled from "./Menu.module.scss";
 
-interface Props {
-  watchId: string;
-  editorOpen: boolean;
-  setEditorOpen: (val: boolean) => void;
-}
-
-export const Menu = ({ watchId, editorOpen, setEditorOpen }: Props) => {
-  const MenuElement = document.getElementById("tokome:menu");
-  const handleOpenEditor = useCallback(() => {
-    if (!editorOpen) {
-      setEditorOpen(true);
-    }
-  }, [editorOpen, setEditorOpen]);
+export const Menu = () => {
+  const MenuElement = getMenuElement();
+  const setEditorOpen = useSetAtom(editorOpenAtom);
+  const handleOpenEditor = () => {
+    setEditorOpen(true);
+  };
   if (!MenuElement) return <></>;
-  return ReactDOM.createPortal(
+  return createPortal(
     <div>
-      <button type="button" onClick={handleOpenEditor}>
+      <Button
+        className={styled.button}
+        type="button"
+        onClick={handleOpenEditor}
+      >
         投コメエディタを開く
-      </button>
-      <span>{watchId}</span>
+      </Button>
     </div>,
     MenuElement
   );

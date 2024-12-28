@@ -1,0 +1,30 @@
+div:has(.container) {
+  position: relative;
+}
+
+.container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 101;
+  border-radius: var(--radii-m);
+  overflow: hidden;
+  background-color: var(--colors-layer-surface-high-em);
+  color: var(--colors-text-on-layer-high-em);
+  fill: var(--colors-text-on-layer-medium-em);
+
+  .controls {
+    display: flex;
+    min-height: var(--watch-collapsible-panel-header-height);
+    height: var(--watch-collapsible-panel-header-height);
+    align-items: center;
+    text-align: left;
+    padding: var(--spacing-base);
+  }
+
+  .table {
+    flex: 1;
+  }
+}
