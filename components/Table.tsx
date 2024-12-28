@@ -1,19 +1,14 @@
-import {
-  commentsAtom,
-  editorOpenAtom,
-  elementsAtom,
-  watchDataAtom,
-} from "@/libraries/atoms";
-import { useAtom, useAtomValue, useSetAtom } from "jotai";
+import { commentsAtom, editorOpenAtom, elementsAtom } from "@/libraries/atoms";
+import { useAtomValue, useSetAtom } from "jotai";
 import { createPortal } from "react-dom";
 import { Button } from "./Button";
 import styled from "./Table.module.scss";
+import { TableEditor } from "./TableEditor";
 
 export const Table = () => {
   const elements = useAtomValue(elementsAtom);
-  const watchData = useAtomValue(watchDataAtom);
   const setEditorOpen = useSetAtom(editorOpenAtom);
-  const [comments, setComments] = useAtom(commentsAtom);
+  const comments = useAtomValue(commentsAtom);
   const handleCloseButton = () => {
     setEditorOpen(false);
   };
@@ -28,7 +23,7 @@ export const Table = () => {
         <Button type="button">保存</Button>
       </div>
       <div className={styled.table}>
-        <table>a</table>
+        <TableEditor />
       </div>
     </div>,
     elements.sidebarElement

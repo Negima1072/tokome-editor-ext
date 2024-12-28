@@ -16,4 +16,11 @@
   &:hover {
     background-color: var(--colors-action-base-hover);
   }
+
+  &:disabled {
+    pointer-events: none;
+    color: var(--colors-action-text-on-base_disabled);
+    fill: var(--colors-action-text-on-base_disabled);
+    border-color: var(--colors-action-text-on-base_disabled);
+  }
 }
