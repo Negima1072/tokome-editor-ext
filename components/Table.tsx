@@ -17,10 +17,14 @@ export const Table = () => {
     <div className={styled.container}>
       <div className={styled.controls}>
         <span>{comments.length}/1000</span>
-        <Button type="button" onClick={handleCloseButton}>
-          閉じる
+        <Button onClick={handleCloseButton}>閉じる</Button>
+        <Button
+          colorType="blue"
+          disabled={comments.length > 1000}
+          onClick={handleSaveButton}
+        >
+          保存
         </Button>
-        <Button type="button">保存</Button>
       </div>
       <div className={styled.table}>
         <TableEditor />

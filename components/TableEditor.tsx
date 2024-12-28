@@ -113,6 +113,7 @@ export const TableEditor = () => {
                       handleTimeChange(comment.no, e.target.value)
                     }
                     onBlur={() => handleTimeBlur(index, comment.no)}
+                    maxLength={10}
                   />
                 </td>
                 <td>
@@ -123,6 +124,7 @@ export const TableEditor = () => {
                       handleEdit(index, "commands", ev.target.value)
                     }
                     title={comment.commands.join(" ")}
+                    maxLength={124}
                   />
                 </td>
                 <td>
@@ -133,6 +135,7 @@ export const TableEditor = () => {
                       handleEdit(index, "body", ev.target.value)
                     }
                     title={comment.body}
+                    maxLength={1024}
                   />
                 </td>
                 <td>{comment.no}</td>
@@ -142,7 +145,11 @@ export const TableEditor = () => {
         </table>
       </div>
       <div className={styled.buttons}>
-        <Button disabled={selectedRows.size === 0} onClick={handleDelete}>
+        <Button
+          colorType="red"
+          disabled={selectedRows.size === 0}
+          onClick={handleDelete}
+        >
           選択したコメントを削除
         </Button>
       </div>

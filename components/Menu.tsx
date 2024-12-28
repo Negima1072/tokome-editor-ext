@@ -14,13 +14,7 @@ export const Menu = () => {
   if (!MenuElement) return <></>;
   return createPortal(
     <div className={styled.container}>
-      <Button
-        className={styled.button}
-        type="button"
-        onClick={handleOpenEditor}
-      >
-        投コメエディタを開く
-      </Button>
+      <Button onClick={handleOpenEditor}>投コメエディタを開く</Button>
     </div>,
     MenuElement
   );

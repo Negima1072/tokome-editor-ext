@@ -45,18 +45,13 @@ div:has(.container) {
   }
 
   button {
-    display: flex;
-    background-color: var(--colors-action-primary-azure);
-    align-items: center;
-    justify-content: center;
     width: var(--sizes-x7);
-    cursor: pointer;
-    user-select: none;
+    height: 100%;
+    border-radius: 0;
 
     &:disabled {
       background-color: var(--colors-action-base);
       fill: var(--colors-action-text-on-base);
-      pointer-events: none;
     }
 
     svg {

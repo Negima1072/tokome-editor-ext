@@ -56,8 +56,8 @@ export const Poster = () => {
         rows={1}
         placeholder="投稿者コメントを入力"
       />
-      <button
-        type="button"
+      <Button
+        colorType="blue"
         disabled={comment.length === 0}
         onClick={handlePostButtonClick}
       >
@@ -74,7 +74,7 @@ export const Poster = () => {
             clip-rule="evenodd"
           />
         </svg>
-      </button>
+      </Button>
     </div>,
     elements.posterDivElement
   );

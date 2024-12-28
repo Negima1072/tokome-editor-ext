@@ -9,12 +9,31 @@
   display: inline-flex;
   color: var(--colors-action-text-on-base);
   fill: var(--colors-action-text-on-base);
-  background-color: var(--colors-action-base);
   height: var(--sizes-x4);
   border-radius: var(--radii-full);
 
-  &:hover {
-    background-color: var(--colors-action-base-hover);
+  &.normal {
+    background-color: var(--colors-action-base);
+
+    &:hover {
+      background-color: var(--colors-action-base-hover);
+    }
+  }
+
+  &.blue {
+    background-color: var(--colors-action-primary-azure);
+
+    &:hover {
+      background-color: var(--colors-action-primary-azure-hover);
+    }
+  }
+
+  &.red {
+    background-color: var(--colors-text-on-layer-accent-lust);
+
+    &:hover {
+      background-color: var(--colors-service-color-nicodic);
+    }
   }
 
   &:disabled {

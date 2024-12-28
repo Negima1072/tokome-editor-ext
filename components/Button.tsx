@@ -1,11 +1,16 @@
 import type { ButtonHTMLAttributes } from "react";
 import styled from "./Button.module.scss";
 
-export const Button = (props: ButtonHTMLAttributes<HTMLButtonElement>) => {
+interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  colorType?: "normal" | "blue" | "red";
+}
+
+export const Button = (props: ButtonProps) => {
   return (
     <button
+      type="button"
       {...props}
-      className={`${props.className || ""} ${styled.button}`}
+      className={`${props.className || ""} ${styled.button} ${styled[props.colorType || "normal"]}`.trim()}
     />
   );
 };
