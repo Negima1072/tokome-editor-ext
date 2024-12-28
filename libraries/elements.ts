@@ -5,6 +5,7 @@ export interface Elements {
   sidebarElement: HTMLDivElement;
   playerDivElement: HTMLDivElement;
   posterDivElement: HTMLDivElement;
+  videoElement: HTMLVideoElement;
 }
 
 export const getElements = async (): Promise<Elements> => {
@@ -22,12 +23,14 @@ export const getElements = async (): Promise<Elements> => {
     const posterDivElement = document.querySelector<HTMLDivElement>(
       "div.grid-area_\\[player\\] > div > div:has(input)"
     );
+    const videoElement = document.querySelector<HTMLVideoElement>("video");
     count++;
     if (
       mainSectionElement === null ||
       sidebarElement === null ||
       playerDivElement === null ||
-      posterDivElement === null
+      posterDivElement === null ||
+      videoElement === null
     ) {
       await sleep(100);
       continue;
@@ -37,6 +40,7 @@ export const getElements = async (): Promise<Elements> => {
       sidebarElement,
       playerDivElement,
       posterDivElement,
+      videoElement,
     };
   }
   throw new Error("section element is not found;;");

@@ -50,6 +50,8 @@ div:has(.container) {
     align-items: center;
     justify-content: center;
     width: var(--sizes-x7);
+    cursor: pointer;
+    user-select: none;
 
     &:disabled {
       background-color: var(--colors-action-base);

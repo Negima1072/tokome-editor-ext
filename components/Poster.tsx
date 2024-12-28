@@ -1,5 +1,5 @@
-import { elementsAtom } from "@/libraries/atoms";
-import { useAtomValue } from "jotai";
+import { commentsAtom, elementsAtom } from "@/libraries/atoms";
+import { useAtomValue, useSetAtom } from "jotai";
 import type { ChangeEvent } from "react";
 import { createPortal } from "react-dom";
 import styled from "./Poster.module.scss";
@@ -8,11 +8,36 @@ export const Poster = () => {
   const [command, setCommand] = useState("");
   const [comment, setComment] = useState("");
   const elements = useAtomValue(elementsAtom);
+  const setComments = useSetAtom(commentsAtom);
   const handleCommandChange = (ev: ChangeEvent<HTMLInputElement>) => {
     setCommand(ev.target.value);
   };
   const handleCommentChange = (ev: ChangeEvent<HTMLTextAreaElement>) => {
     setComment(ev.target.value);
+  };
+  const handlePostButtonClick = () => {
+    if (!elements) return;
+    setComments((prev) => {
+      let idx = 0;
+      return [
+        ...(prev || [])
+          .sort((a, b) => a.no - b.no)
+          .map((cm) => {
+            idx++;
+            return {
+              ...cm,
+              no: idx,
+            };
+          }),
+        {
+          body: comment,
+          commands: command.split(" "),
+          vposMs: Math.floor(elements.videoElement.currentTime * 1000),
+          no: idx + 1,
+        },
+      ];
+    });
+    setComment("");
   };
   if (!elements) return <></>;
   return createPortal(
@@ -22,6 +47,7 @@ export const Poster = () => {
         value={command}
         onChange={handleCommandChange}
         placeholder="コマンド"
+        maxLength={124}
       />
       <textarea
         maxLength={1024}
@@ -30,7 +56,11 @@ export const Poster = () => {
         rows={1}
         placeholder="投稿者コメントを入力"
       />
-      <button type="button" disabled>
+      <button
+        type="button"
+        disabled={comment.length === 0}
+        onClick={handlePostButtonClick}
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"
