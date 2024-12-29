@@ -1,9 +1,15 @@
 # 投コメエディター
 
-React + WXT で作成されたニコニコ動画に投稿者コメントを編集する機能を追加する非公式の拡張機能です。
+[![Release](https://github.com/Negima1072/tokome-editor-ext/actions/workflows/release.yml/badge.svg)](https://github.com/Negima1072/tokome-editor-ext/actions/workflows/release.yml)
+
+[Chrome Web Store](https://chromewebstore.google.com/detail/bdbienjcniccfidmmonnnndmhpckhgpo) | [Firefox Addons](https://addons.mozilla.org/ja/firefox/addon/tokome-editor/)
+
+ニコニコ動画に投稿者コメントを編集する機能を追加する非公式の拡張機能です。
 
 旧 HTML5 プレイヤーに搭載されていた投稿者コメントの編集機能を実装しています。
 現在のプレイヤーにこの機能が搭載されたらこの拡張機能はアーカイブされます。
+
+現在はニコニコ側の問題により 8KB までしか投稿できません。
 
 ## TODO
 
