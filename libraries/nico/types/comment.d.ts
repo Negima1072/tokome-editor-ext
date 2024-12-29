@@ -32,9 +32,6 @@ interface MiniComment {
 
 interface OwnerComment extends MiniComment {
   id: string;
-  userId: string;
-  isMyPost: boolean;
-  isPremium: boolean;
 }
 
 interface Comment extends OwnerComment {
@@ -44,4 +41,6 @@ interface Comment extends OwnerComment {
   source: string;
   score: number;
   userId: string;
+  isMyPost: boolean;
+  isPremium: boolean;
 }

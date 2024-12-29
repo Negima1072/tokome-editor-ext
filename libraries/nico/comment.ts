@@ -1,4 +1,3 @@
-import { v4 as uuid } from "uuid";
 import { swfetch } from "../fetch";
 import { HEADERS } from "./const";
 
@@ -95,11 +94,8 @@ export const updateOwnerComment = async (
       .map((comment, index) => {
         return {
           ...comment,
-          id: uuid(),
+          id: index.toString(),
           no: index + 1,
-          userId: watchData.viewer.id.toString(),
-          isMyPost: true,
-          isPremium: watchData.viewer.isPremium,
         };
       }),
   };
