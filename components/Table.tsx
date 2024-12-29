@@ -30,9 +30,16 @@ export const Table = () => {
           return target.fork === "owner";
         })[0].id
       );
-      if (!updateKey) throw new Error("updateKey is unavailable");
+      if (!updateKey) throw new Error("UpdateKey is unavailable");
       await updateOwnerComment(watchData, updateKey, comments);
-    } catch (e) {}
+      setIsChanged(false);
+    } catch (e) {
+      let message = "Unknown error";
+      if (e instanceof Error) {
+        message = e.message;
+      }
+      alert(`コメントを保存できませんでした: ${message}`);
+    }
     setIsSaving(false);
   };
   if (!elements || !comments) return <></>;
