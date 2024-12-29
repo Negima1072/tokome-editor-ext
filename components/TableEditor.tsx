@@ -3,7 +3,11 @@ import { str2time, time2str } from "@/libraries/vpos";
 import { useAtom } from "jotai";
 import styled from "./TableEditor.module.scss";
 
-export const TableEditor = () => {
+interface Props {
+  onChange?: () => void;
+}
+
+export const TableEditor = (props: Props) => {
   const [comments, setComments] = useAtom(commentsAtom);
   const [selectedRows, setSelectedRows] = useState<Set<number>>(new Set());
   const [tempTime, setTempTime] = useState<{ [key: number]: string }>({});
@@ -38,6 +42,7 @@ export const TableEditor = () => {
         updatedComments[index].vposMs = newTime * 1000;
         return updatedComments;
       });
+      props.onChange?.();
     }
     setTempTime((prev) => {
       const newTemp = { ...prev };
@@ -59,11 +64,13 @@ export const TableEditor = () => {
       }
       return updatedComments;
     });
+    props.onChange?.();
   };
   const handleDelete = () => {
     setComments((prev) =>
       (prev || []).filter((comment) => !selectedRows.has(comment.no))
     );
+    props.onChange?.();
     setSelectedRows(new Set());
   };
   if (!comments) return <></>;
