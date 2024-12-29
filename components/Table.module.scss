@@ -9,7 +9,7 @@ div:has(.container) {
   top: 0;
   left: 0;
   width: 100%;
-  height: calc(var(--watch-player-height) + 64px);
+  height: calc(var(--watch-player-height) + 120px);
   z-index: 6;
   border-radius: var(--radii-m);
   overflow: hidden;
@@ -37,5 +37,16 @@ div:has(.container) {
     overflow: hidden;
     display: flex;
     flex-direction: column;
+  }
+}
+
+.editorModeButton {
+  border: 1px solid var(--colors-text-on-layer-lower-em);
+  padding: 3px;
+  font-size: 12px;
+  margin-right: 5px;
+
+  &:hover {
+    background-color: var(--colors-action-base);
   }
 }

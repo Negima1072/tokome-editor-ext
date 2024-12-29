@@ -73,7 +73,6 @@ export const getComments = async (
   return data.data;
 };
 
-// 返り値の型を確認する.
 export const updateOwnerComment = async (
   watchData: WatchData,
   updateKey: string,
@@ -87,7 +86,7 @@ export const updateOwnerComment = async (
   const payload: {
     updateKey: string;
     videoId: string;
-    comments: MiniComment[]; //OwnerComment[];
+    comments: OwnerComment[];
   } = {
     updateKey,
     videoId: watchData.video.id,

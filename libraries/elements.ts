@@ -15,7 +15,7 @@ export const getElements = async (): Promise<Elements> => {
       "main > div > section"
     );
     const sidebarElement = document.querySelector<HTMLDivElement>(
-      "div.grid-area_\\[sidebar\\]"
+      "div.grid-area_\\[sidebar\\] > div > div:has(section)"
     );
     const playerDivElement = document.querySelector<HTMLDivElement>(
       "div.grid-area_\\[player\\] > div > div:has(video)"
