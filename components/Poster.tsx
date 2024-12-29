@@ -1,4 +1,8 @@
-import { commentsAtom, elementsAtom } from "@/libraries/atoms";
+import {
+  commentsAtom,
+  commentsChangedAtom,
+  elementsAtom,
+} from "@/libraries/atoms";
 import { useAtomValue, useSetAtom } from "jotai";
 import type { ChangeEvent } from "react";
 import { createPortal } from "react-dom";
@@ -7,6 +11,7 @@ import styled from "./Poster.module.scss";
 export const Poster = () => {
   const [command, setCommand] = useState("");
   const [comment, setComment] = useState("");
+  const setCommentsChanged = useSetAtom(commentsChangedAtom);
   const elements = useAtomValue(elementsAtom);
   const setComments = useSetAtom(commentsAtom);
   const handleCommandChange = (ev: ChangeEvent<HTMLInputElement>) => {
@@ -37,6 +42,7 @@ export const Poster = () => {
         },
       ];
     });
+    setCommentsChanged(true);
     setComment("");
   };
   if (!elements) return <></>;

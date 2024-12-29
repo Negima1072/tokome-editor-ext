@@ -1,11 +1,12 @@
 import {
   commentsAtom,
+  commentsChangedAtom,
   editorOpenAtom,
   elementsAtom,
   watchDataAtom,
 } from "@/libraries/atoms";
 import { getUpdateKey, updateOwnerComment } from "@/libraries/nico/comment";
-import { useAtomValue, useSetAtom } from "jotai";
+import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import { createPortal } from "react-dom";
 import { Button } from "./Button";
 import { JsonEditor } from "./JsonEditor";
@@ -13,7 +14,7 @@ import styled from "./Table.module.scss";
 import { TableEditor } from "./TableEditor";
 
 export const Table = () => {
-  const [isChanged, setIsChanged] = useState(false);
+  const [commentsChanged, setCommentsChanged] = useAtom(commentsChangedAtom);
   const [isSaving, setIsSaving] = useState(false);
   const [editorMode, setEditorMode] = useState<"table" | "json">("table");
   const elements = useAtomValue(elementsAtom);
@@ -41,7 +42,7 @@ export const Table = () => {
       );
       if (!updateKey) throw new Error("UpdateKey is unavailable");
       await updateOwnerComment(watchData, updateKey, comments);
-      setIsChanged(false);
+      setCommentsChanged(false);
     } catch (e) {
       let message = "Unknown error";
       if (e instanceof Error) {
@@ -66,7 +67,7 @@ export const Table = () => {
         <Button onClick={handleCloseButton}>閉じる</Button>
         <Button
           colorType="blue"
-          disabled={comments.length > 1000 || isSaving || !isChanged}
+          disabled={comments.length > 1000 || isSaving || !commentsChanged}
           onClick={handleSaveButton}
         >
           保存
@@ -74,10 +75,15 @@ export const Table = () => {
       </div>
       <div className={styled.table}>
         {editorMode === "table" && (
-          <TableEditor onChange={() => setIsChanged(true)} />
+          <TableEditor onChange={() => setCommentsChanged(true)} />
         )}
         {editorMode === "json" && (
-          <JsonEditor onSave={() => setEditorMode("table")} />
+          <JsonEditor
+            onSave={() => {
+              setEditorMode("table");
+              setCommentsChanged(true);
+            }}
+          />
         )}
       </div>
     </div>,

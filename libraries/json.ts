@@ -10,6 +10,7 @@ export const isSafeJson = (json: string): boolean => {
   try {
     const parsed = JSON.parse(json);
     if (!Array.isArray(parsed)) return false;
+    if (parsed.length > 1000) return false;
     if (
       !parsed.every(
         (item) =>
