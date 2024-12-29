@@ -8,18 +8,27 @@ import { getUpdateKey, updateOwnerComment } from "@/libraries/nico/comment";
 import { useAtomValue, useSetAtom } from "jotai";
 import { createPortal } from "react-dom";
 import { Button } from "./Button";
+import { JsonEditor } from "./JsonEditor";
 import styled from "./Table.module.scss";
 import { TableEditor } from "./TableEditor";
 
 export const Table = () => {
   const [isChanged, setIsChanged] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
+  const [editorMode, setEditorMode] = useState<"table" | "json">("table");
   const elements = useAtomValue(elementsAtom);
   const watchData = useAtomValue(watchDataAtom);
   const setEditorOpen = useSetAtom(editorOpenAtom);
   const comments = useAtomValue(commentsAtom);
   const handleCloseButton = () => {
     setEditorOpen(false);
+  };
+  const handleEditorModeButton = () => {
+    if (editorMode === "json") {
+      setEditorMode("table");
+    } else {
+      setEditorMode("json");
+    }
   };
   const handleSaveButton = async () => {
     if (!watchData || !comments || isSaving) return;
@@ -47,6 +56,13 @@ export const Table = () => {
     <div className={styled.container}>
       <div className={styled.controls}>
         <span>{comments.length}/1000</span>
+        <button
+          type="button"
+          className={styled.editorModeButton}
+          onClick={handleEditorModeButton}
+        >
+          {editorMode === "table" ? "JSONエディタ" : "テーブルエディタ"}
+        </button>
         <Button onClick={handleCloseButton}>閉じる</Button>
         <Button
           colorType="blue"
@@ -57,7 +73,12 @@ export const Table = () => {
         </Button>
       </div>
       <div className={styled.table}>
-        <TableEditor onChange={() => setIsChanged(true)} />
+        {editorMode === "table" && (
+          <TableEditor onChange={() => setIsChanged(true)} />
+        )}
+        {editorMode === "json" && (
+          <JsonEditor onSave={() => setEditorMode("table")} />
+        )}
       </div>
     </div>,
     elements.sidebarElement

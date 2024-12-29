@@ -1,0 +1,22 @@
+.container {
+  flex: 1;
+
+  textarea {
+    width: 100%;
+    height: 100%;
+    font-size: 12px;
+    padding: 5px;
+    resize: none;
+  }
+}
+
+.buttons {
+  display: flex;
+  min-height: var(--watch-collapsible-panel-header-height);
+  height: var(--watch-collapsible-panel-header-height);
+  align-items: center;
+  text-align: left;
+  gap: 5px;
+  padding: var(--spacing-base);
+  border-bottom: 1px var(--colors-text-on-layer-lower-em) solid;
+}
