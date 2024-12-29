@@ -5,7 +5,6 @@ export const useLocation = () => {
 
   useEffect(() => {
     const handleLocationChange = () => {
-      console.log(window.location.href);
       setCurrentHref(window.location.href);
     };
 

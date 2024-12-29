@@ -1,4 +1,3 @@
-import { v4 as uuid } from "uuid";
 import { swfetch } from "../fetch";
 import { HEADERS } from "./const";
 
@@ -87,20 +86,22 @@ export const updateOwnerComment = async (
   const payload: {
     updateKey: string;
     videoId: string;
-    comments: OwnerComment[];
+    comments: MiniComment[]; //OwnerComment[];
   } = {
     updateKey,
     videoId: watchData.video.id,
-    comments: comments.map((comment, index) => {
-      return {
-        ...comment,
-        id: uuid(),
-        no: index + 1,
-        userId: watchData.viewer.id.toString(),
-        isMyPost: true,
-        isPremium: watchData.viewer.isPremium,
-      };
-    }),
+    comments: comments
+      .sort((a, b) => a.no - b.no)
+      .map((comment, index) => {
+        return {
+          ...comment,
+          //id: uuid(),
+          no: index + 1,
+          //userId: watchData.viewer.id.toString(),
+          //isMyPost: true,
+          //isPremium: watchData.viewer.isPremium,
+        };
+      }),
   };
   const response = await swfetch(
     `${watchData.comment.nvComment.server}/v1/threads/${threadId}/owner-comments`,

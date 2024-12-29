@@ -1,4 +1,10 @@
-import { commentsAtom, editorOpenAtom, elementsAtom } from "@/libraries/atoms";
+import {
+  commentsAtom,
+  editorOpenAtom,
+  elementsAtom,
+  watchDataAtom,
+} from "@/libraries/atoms";
+import { getUpdateKey, updateOwnerComment } from "@/libraries/nico/comment";
 import { useAtomValue, useSetAtom } from "jotai";
 import { createPortal } from "react-dom";
 import { Button } from "./Button";
@@ -7,10 +13,21 @@ import { TableEditor } from "./TableEditor";
 
 export const Table = () => {
   const elements = useAtomValue(elementsAtom);
+  const watchData = useAtomValue(watchDataAtom);
   const setEditorOpen = useSetAtom(editorOpenAtom);
   const comments = useAtomValue(commentsAtom);
   const handleCloseButton = () => {
     setEditorOpen(false);
+  };
+  const handleSaveButton = async () => {
+    if (!watchData || !comments) return;
+    const updateKey = await getUpdateKey(
+      watchData.comment.nvComment.params.targets.filter((target) => {
+        return target.fork === "owner";
+      })[0].id
+    );
+    if (!updateKey) return;
+    const res = await updateOwnerComment(watchData, updateKey, comments);
   };
   if (!elements || !comments) return <></>;
   return createPortal(

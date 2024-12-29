@@ -1,8 +1,8 @@
 export default defineBackground({
   main() {
     browser.runtime.onMessage.addListener((message, _, sendResponse) => {
-      if (message.action === "fetchData") {
-        const { url, method = "GET", headers = {} } = message;
+      if (message.type === "FETCH_DATA") {
+        const { url, method = "GET", headers = {}, body = null } = message;
         browser.cookies.get(
           { url: "https://nicovideo.jp", name: "user_session" },
           (cookie) => {
@@ -13,6 +13,7 @@ export default defineBackground({
                   ...headers,
                   Cookie: `${cookie.name}=${cookie.value}`,
                 },
+                body,
               })
                 .then(async (response) => {
                   const data = await response.json();
@@ -32,6 +33,7 @@ export default defineBackground({
       } else {
         sendResponse();
       }
+      return true;
     });
   },
 });
