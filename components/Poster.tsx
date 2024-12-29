@@ -48,6 +48,7 @@ export const Poster = () => {
         onChange={handleCommandChange}
         placeholder="コマンド"
         maxLength={124}
+        spellCheck={false}
       />
       <textarea
         maxLength={1024}
@@ -55,6 +56,7 @@ export const Poster = () => {
         onChange={handleCommentChange}
         rows={1}
         placeholder="投稿者コメントを入力"
+        spellCheck={false}
       />
       <Button
         colorType="blue"

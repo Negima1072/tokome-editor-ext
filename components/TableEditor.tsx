@@ -114,6 +114,7 @@ export const TableEditor = () => {
                     }
                     onBlur={() => handleTimeBlur(index, comment.no)}
                     maxLength={10}
+                    spellCheck={false}
                   />
                 </td>
                 <td>
@@ -125,6 +126,7 @@ export const TableEditor = () => {
                     }
                     title={comment.commands.join(" ")}
                     maxLength={124}
+                    spellCheck={false}
                   />
                 </td>
                 <td>
@@ -136,6 +138,7 @@ export const TableEditor = () => {
                     }
                     title={comment.body}
                     maxLength={1024}
+                    spellCheck={false}
                   />
                 </td>
                 <td>{comment.no}</td>
