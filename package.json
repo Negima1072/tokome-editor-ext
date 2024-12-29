@@ -2,7 +2,7 @@
   "name": "tokome-editor-ext",
   "description": "NicoVideo Alternative Owner Comments Editor",
   "private": true,
-  "version": "0.0.1",
+  "version": "0.0.2",
   "type": "module",
   "scripts": {
     "dev": "wxt",
