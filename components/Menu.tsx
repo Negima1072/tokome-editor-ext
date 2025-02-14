@@ -1,7 +1,9 @@
-import { editorOpenAtom } from "@/libraries/atoms";
-import { getMenuElement } from "@/libraries/elements";
 import { useSetAtom } from "jotai";
 import { createPortal } from "react-dom";
+
+import { editorOpenAtom } from "@/libraries/atoms";
+import { getMenuElement } from "@/libraries/elements";
+
 import { Button } from "./Button";
 import styled from "./Menu.module.scss";
 

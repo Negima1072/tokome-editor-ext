@@ -1,6 +1,8 @@
+import { useAtom } from "jotai";
+
 import { commentsAtom } from "@/libraries/atoms";
 import { str2time, time2str } from "@/libraries/vpos";
-import { useAtom } from "jotai";
+
 import styled from "./TableEditor.module.scss";
 
 interface Props {

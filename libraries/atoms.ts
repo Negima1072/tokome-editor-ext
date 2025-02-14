@@ -1,4 +1,5 @@
 import { atom } from "jotai";
+
 import type { Elements } from "./elements";
 
 export const editorOpenAtom = atom<boolean>(false);

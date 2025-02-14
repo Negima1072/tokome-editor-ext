@@ -1,11 +1,13 @@
+import { useAtomValue, useSetAtom } from "jotai";
+import type { ChangeEvent } from "react";
+import { createPortal } from "react-dom";
+
 import {
   commentsAtom,
   commentsChangedAtom,
   elementsAtom,
 } from "@/libraries/atoms";
-import { useAtomValue, useSetAtom } from "jotai";
-import type { ChangeEvent } from "react";
-import { createPortal } from "react-dom";
+
 import styled from "./Poster.module.scss";
 
 export const Poster = () => {

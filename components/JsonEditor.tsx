@@ -1,6 +1,8 @@
+import { useAtom } from "jotai";
+
 import { commentsAtom } from "@/libraries/atoms";
 import { comments2json, isSafeJson, json2comments } from "@/libraries/json";
-import { useAtom } from "jotai";
+
 import styled from "./JsonEditor.module.scss";
 
 interface Props {

@@ -1,3 +1,5 @@
+import { useAtomValue, useSetAtom } from "jotai";
+
 import {
   commentsAtom,
   commentsChangedAtom,
@@ -5,7 +7,7 @@ import {
 } from "@/libraries/atoms";
 import { getElements } from "@/libraries/elements";
 import { getComments } from "@/libraries/nico/comment";
-import { useAtomValue, useSetAtom } from "jotai";
+
 import { Background } from "./Background";
 import { Poster } from "./Poster";
 import { Table } from "./Table";

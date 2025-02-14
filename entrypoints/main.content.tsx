@@ -1,6 +1,7 @@
+import { createRoot } from "react-dom/client";
+
 import { Root } from "@/components/Root";
 import { createMenuElement, getElements } from "@/libraries/elements";
-import { createRoot } from "react-dom/client";
 
 export default defineContentScript({
   matches: ["https://www.nicovideo.jp/watch/*"],

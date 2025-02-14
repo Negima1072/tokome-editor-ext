@@ -1,9 +1,11 @@
+import { useAtom, useAtomValue, useSetAtom } from "jotai";
+import { useEffect, useState } from "react";
+
 import { useLocation } from "@/hooks/useLocation";
 import { editorOpenAtom, elementsAtom, watchDataAtom } from "@/libraries/atoms";
 import { getElements } from "@/libraries/elements";
 import { getWatchData } from "@/libraries/nico/watch";
-import { useAtom, useAtomValue, useSetAtom } from "jotai";
-import { useEffect, useState } from "react";
+
 import { Editor } from "./Editor";
 import { Menu } from "./Menu";
 

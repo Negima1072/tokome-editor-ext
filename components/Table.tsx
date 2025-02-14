@@ -1,3 +1,6 @@
+import { useAtom, useAtomValue, useSetAtom } from "jotai";
+import { createPortal } from "react-dom";
+
 import {
   commentsAtom,
   commentsChangedAtom,
@@ -6,8 +9,7 @@ import {
   watchDataAtom,
 } from "@/libraries/atoms";
 import { getUpdateKey, updateOwnerComment } from "@/libraries/nico/comment";
-import { useAtom, useAtomValue, useSetAtom } from "jotai";
-import { createPortal } from "react-dom";
+
 import { Button } from "./Button";
 import { JsonEditor } from "./JsonEditor";
 import styled from "./Table.module.scss";
