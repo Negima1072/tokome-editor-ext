@@ -24,6 +24,11 @@ export const Table = () => {
   const setEditorOpen = useSetAtom(editorOpenAtom);
   const comments = useAtomValue(commentsAtom);
   const handleCloseButton = () => {
+    if (
+      (commentsChanged || editorMode === "json") &&
+      !confirm("変更を破棄しますか？")
+    )
+      return;
     setEditorOpen(false);
   };
   const handleEditorModeButton = () => {
