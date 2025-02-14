@@ -25,6 +25,7 @@ export const JsonEditor = (props: Props) => {
           value={jsonText}
           onChange={(e) => setJsonText(e.target.value)}
           spellCheck={false}
+          wrap="off"
         />
       </div>
       <div className={styled.buttons}>
