@@ -48,7 +48,8 @@ export const Table = () => {
         })[0].id
       );
       if (!updateKey) throw new Error("UpdateKey is unavailable");
-      await updateOwnerComment(watchData, updateKey, comments);
+      const result = await updateOwnerComment(watchData, updateKey, comments);
+      if (!result) throw new Error("Failed to update comment");
       setCommentsChanged(false);
     } catch (e) {
       let message = "Unknown error";
