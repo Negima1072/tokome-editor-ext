@@ -1,43 +1,42 @@
 import { swfetch } from "../fetch";
 import { HEADERS } from "./const";
 
-export const getThreadKey = async (
-  watchId: string
-): Promise<string | undefined> => {
+export const getThreadKey = async (watchId: string): Promise<string | null> => {
   const response = await fetch(
     `https://nvapi.nicovideo.jp/v1/comment/keys/thread?videoId=${watchId}`,
     {
       headers: HEADERS,
+      credentials: "include",
     }
   );
   const data: NvAPIResponse<ThreadKey> = await response.json();
-  return data.data?.threadKey;
+  return data.data?.threadKey || null;
 };
 
-export const getPostKey = async (
-  threadId: string
-): Promise<string | undefined> => {
+export const getPostKey = async (threadId: string): Promise<string | null> => {
   const response = await fetch(
     `https://nvapi.nicovideo.jp/v1/comment/keys/post?threadId=${threadId}`,
     {
       headers: HEADERS,
+      credentials: "include",
     }
   );
   const data: NvAPIResponse<PostKey> = await response.json();
-  return data.data?.postKey;
+  return data.data?.postKey || null;
 };
 
 export const getUpdateKey = async (
   threadId: string
-): Promise<string | undefined> => {
+): Promise<string | null> => {
   const response = await swfetch(
     `https://nvapi.nicovideo.jp/v1/comment/keys/update?threadId=${threadId}`,
     {
       headers: HEADERS,
+      credentials: "include",
     }
   );
   const data: NvAPIResponse<UpdateKey> = await response.json();
-  return data.data?.updateKey;
+  return data.data?.updateKey || null;
 };
 
 export const getComments = async (
@@ -65,11 +64,11 @@ export const getComments = async (
     }
   );
   const data: NvCommentAPIResponse = await response.json();
-  if (data.meta.error_code === "EXPIRED_TOKEN") {
+  if (data.meta.errorCode === "EXPIRED_TOKEN") {
     const newThreadKey = await getThreadKey(watchData.video.id);
     return await getComments(watchData, forks, newThreadKey);
   }
-  return data.data;
+  return data.data || null;
 };
 
 export const updateOwnerComment = async (

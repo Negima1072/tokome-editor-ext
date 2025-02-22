@@ -3,9 +3,9 @@ type ForkType = "main" | "easy" | "owner";
 interface NvCommentAPIResponse {
   meta: {
     status: number;
-    error_code: string | null;
+    errorCode: string | null;
   };
-  data: CommentData | null;
+  data?: CommentData;
 }
 
 interface CommentData {

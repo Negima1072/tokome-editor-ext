@@ -5,6 +5,7 @@ export const getWatchData = async (watchId: string): Promise<WatchData> => {
     `https://www.nicovideo.jp/watch/${watchId}?responseType=json`,
     {
       headers: HEADERS,
+      credentials: "include",
     }
   );
   const data: WatchAPIResponse = await response.json();

@@ -3,7 +3,7 @@ interface NvAPIResponse<T = unknown> {
     status: number;
     error_code: string | null;
   };
-  data: T | null;
+  data?: T;
 }
 
 interface ThreadKey {
